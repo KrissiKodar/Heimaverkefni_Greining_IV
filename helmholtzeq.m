@@ -1,4 +1,4 @@
-function [A,c]=helmholtzeq(L1,L2,h,lambda)
+function [A,c]=helmholtzeq_lol(L1,L2,h,lambda)
 
 xb=0;
 yb=0;
@@ -30,7 +30,6 @@ for k=2:M
     %A(vinstri_p,vinstri_p-1)=-2/h^2;%enginn punktur til vinstri
     A(vinstri_p,vinstri_p+1)=-2/h^2;
     A(vinstri_p,vinstri_p-M-1)=-1/h^2;
-    A(vinstri_p,vinstri_p+M+1)=-1/h^2;
     %y=yb+(k-1)*h;
     b_vigur(vinstri_p)=ff(0,yb+(k-1)*h);%gamma og beta eru = 0
 end
@@ -47,8 +46,6 @@ end
 for k=2:M
     %haegri_p=M+1+(k-1)*(M+1);
     haegri_p=k*(M+1);
-    A(haegri_p,haegri_p)=4/h^2+q;
-    A(haegri_p,haegri_p-1)=-2/h^2;
     %A(haegri_p,haegri_p+1)=0;%engin punktur til vinstri
     A(haegri_p,haegri_p-M-1)=-1/h^2;
     A(haegri_p,haegri_p+M+1)=-1/h^2;
@@ -63,7 +60,7 @@ for k=2:M
         %x=xb+(j-1)*h;
         %y=yb+(k-1)*h;
         A(innri_p,innri_p)=4/h^2+q;
-        A(innri_p,innri_p-1)=-1/h^2;
+        A(9,9)=43;
         A(innri_p,innri_p+1)=-1/h^2;
         A(innri_p,innri_p-N-1)=-1/h^2;
         A(innri_p,innri_p+N+1)=-1/h^2;
@@ -77,8 +74,8 @@ c=A\b_vigur;
 HZ=zeros(N+1,M+1);
 
 for j=1:N+1
-    for k=1:M+1
-        HZ(j,k)=c(k+(j-1)*(M+1));
+    for k=1:M+2
+        HZ(j,k)=c(k+(j-2)*(M+1));
     end
 end
 
@@ -95,3 +92,5 @@ HZ
 %    end
 %end
 %g
+
+%looooool
