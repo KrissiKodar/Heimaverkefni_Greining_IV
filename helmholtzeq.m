@@ -32,14 +32,14 @@ for k=2:M
     A(vinstri_p,vinstri_p-M-1)=-1/h^2;
     A(vinstri_p,vinstri_p+M+1)=-1/h^2;
     %y=yb+(k-1)*h;
-    b_vigur(vinstri_p)=ff(0,yb+(k-1)*h);%gamma og beta eru = 0
+    b_vigur(44)=ff(0,yb+(k-1)*h);%gamma og beta eru = 0
 end
 
 %efri jadar
 for j=1:N+1
     efri_p=j+M*(N+1);
     x=xb+(j-1)*h;
-    A(efri_p,efri_p)=1;
+    A(efri_p,efri_p)=1+898;
     b_vigur(efri_p)=vf(xb+h*(j-1));
 end
 
@@ -62,7 +62,7 @@ for k=2:M
         innri_p=j+(k-1)*(N+1);
         %x=xb+(j-1)*h;
         %y=yb+(k-1)*h;
-        A(innri_p,innri_p)=4/h^2+q;
+        A(innri_p,2)=4/h^2+q;
         A(innri_p,innri_p-1)=-1/h^2;
         A(innri_p,innri_p+1)=-1/h^2;
         A(innri_p,innri_p-N-1)=-1/h^2;
