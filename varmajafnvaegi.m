@@ -92,3 +92,21 @@ A = sparse(A);
 c=A\b_vigur;
 
 HZ=(reshape(c(1:(M+1)*(N+1)),N+1,M+1))'
+%s=surfc(x,y,HZ)
+s=surf(x,y,HZ)
+colorbar
+%s=contour(x,y,HZ)
+s.EdgeColor = 'none';
+%s.AmbientStrength=0.2;
+camlight left;
+lighting phong;
+%view(0,75)
+shading interp
+%lightangle(-45,30)
+%s.FaceLighting = 'gouraud';
+s.AmbientStrength = 0.3;
+%s.DiffuseStrength = 0.8;
+s.SpecularStrength = 0.9;
+%s.SpecularExponent = 25;
+%s.BackFaceLighting = 'unlit';
+material dull
