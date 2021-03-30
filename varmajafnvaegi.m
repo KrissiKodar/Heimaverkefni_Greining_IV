@@ -2,9 +2,6 @@ function V=varmajafnvaegi(a,b,beta1,beta2,h);
 
 %hja okkur er q=0
 
-xb=0;
-yb=0;
-
 N=a/h;
 M=b/h;
 
@@ -13,6 +10,8 @@ k=b/M;%ma orugglega fara
 
 %r=@(x,y) 0;
 
+xb=0;
+yb=0;
 x=xb+(0:N)*u;
 y=yb+(0:M)*k;
 
@@ -36,12 +35,12 @@ for i=2:N
         %A(pkt,i+j*(N+1))=-1-h^2*(r(x(i)+h/3,y(j)+2*h/3)+r(x(i)-h/3,y(j)+h/3))/18;
         
         A(pkt,pkt)=2*(u^2+k^2)/(u*k);
-        A(pkt,pkt-1)=-k/u;
-        A(pkt,i-1+(j-2)*(N+1))=0;
-        A(pkt,i+(j-2)*(N+1))=-u/k;
-        A(pkt,pkt+1)=-k/u;
-        A(pkt,i+1+j*(N+1))=0;
-        A(pkt,i+j*(N+1))=-u/k;
+        A(pkt,pkt-1)=-k/u;%vinstri
+        A(pkt,i-1+(j-2)*(N+1))=0;%ska nidur til vinstri
+        A(pkt,i+(j-2)*(N+1))=-u/k;%nidur
+        A(pkt,pkt+1)=-k/u;%haegri
+        A(pkt,i+1+j*(N+1))=0;%ska upp til haegri
+        A(pkt,i+j*(N+1))=-u/k;%upp
         
         %f_sum=f(x(i)-2*h/3,y(j)-h/3)+f(x(i)-h/3,y(j)-2*h/3)+f(x(i)+h/3,y(j)-h/3);
         %f_sum=f_sum+f(x(i)+2*h/3,y(j)+h/3)+f(x(i)+h/3,y(j)+2*h/3)+f(x(i)-h/3,y(j)+h/3);
@@ -91,6 +90,5 @@ end
 
 A = sparse(A);
 c=A\b_vigur;
-size(c)
-mn=(M+1)*(N+1);
-HZ=(reshape(c(1:mn),N+1,M+1))'
+
+HZ=(reshape(c(1:(M+1)*(N+1)),N+1,M+1))'
