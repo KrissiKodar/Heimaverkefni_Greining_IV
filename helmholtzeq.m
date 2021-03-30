@@ -7,13 +7,8 @@ N=L1/h;
 M=L2/h;
 q=-lambda^2;
 
-
-%x=zeros(N+1,1);
-%y=zeros(M+1,1);
 b_vigur=zeros((N+1)*(M+1),1);
-%b_vigur=zeros(M+1,1);
 A=zeros((N+1)*(M+1),(N+1)*(M+1));
-%A=zeros(M+1,N+1)
 
 %nedri jadar
 for j=1:N+1
@@ -74,17 +69,5 @@ end
 A = sparse(A);
 c=A\b_vigur;
 
-%HZ=zeros(M+1,N+1);
-
-%for j=1:N+1
-%    for k=1:M+1
-%        HZ(j,k)=c(k+(j-1)*(M+1));
-%    end
-%end
-
-%HZ;
-x=(0:N+1)*h;
-y=(0:M+1)*h;
-mn=(M+1)*(N+1);
-HZ=(reshape(c(1:mn),N+1,M+1))'
+HZ=(reshape(c(1:(M+1)*(N+1)),N+1,M+1))'
 %mesh(x,y,HZ)
